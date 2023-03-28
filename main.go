@@ -7,32 +7,29 @@ import (
 )
 
 func handle_expr_context(ctx parser.IExprContext) {
-	_, is_const_true := ctx.(*parser.ConstTrueContext)
-	if is_const_true {
+	switch ctx := ctx.(type) {
+	default:
+		print("unsupported syntax\n")
+	case *parser.ConstTrueContext:
 		print("I see true\n")
-		return
-	}
-	if_ctx, is_if := ctx.(*parser.IfContext)
-	if is_if {
-		handle_expr_context(if_ctx.GetCondition())
-		handle_expr_context(if_ctx.GetThenExpr())
-		handle_expr_context(if_ctx.GetElseExpr())
-		return
-	}
-	var_ctx, is_var := ctx.(*parser.VarContext)
-	if is_var {
-		print("I see variable ", var_ctx.GetName().GetText(), "\n")
-		return
+	case *parser.IfContext:
+		handle_expr_context(ctx.GetCondition())
+		handle_expr_context(ctx.GetThenExpr())
+		handle_expr_context(ctx.GetElseExpr())
+	case *parser.VarContext:
+		print("I see variable ", ctx.GetName().GetText(), "\n")
 	}
 }
 
 func handle_decl_context(ctx parser.IDeclContext) {
-	decl_fun_ctx, is_decl_fun := ctx.(*parser.DeclFunContext)
-	if is_decl_fun {
-		print("Declare function ", decl_fun_ctx.GetName().GetText(), "\n")
+	switch ctx := ctx.(type) {
+	default:
+		print("unsupported syntax\n")
+	case *parser.DeclFunContext:
+		print("Declare function ", ctx.GetName().GetText(), "\n")
 		// decl_fun_ctx.GetParamDecls()
 		// decl_fun_ctx.GetReturnType()
-		handle_expr_context(decl_fun_ctx.GetReturnExpr())
+		handle_expr_context(ctx.GetReturnExpr())
 	}
 }
 
