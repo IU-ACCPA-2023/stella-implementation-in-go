@@ -58,8 +58,17 @@ type StellaParserListener interface {
 	// EnterVar is called when entering the Var production.
 	EnterVar(c *VarContext)
 
+	// EnterInl is called when entering the Inl production.
+	EnterInl(c *InlContext)
+
 	// EnterGreaterThanOrEqual is called when entering the GreaterThanOrEqual production.
 	EnterGreaterThanOrEqual(c *GreaterThanOrEqualContext)
+
+	// EnterInr is called when entering the Inr production.
+	EnterInr(c *InrContext)
+
+	// EnterDivide is called when entering the Divide production.
+	EnterDivide(c *DivideContext)
 
 	// EnterLessThan is called when entering the LessThan production.
 	EnterLessThan(c *LessThanContext)
@@ -100,8 +109,14 @@ type StellaParserListener interface {
 	// EnterHead is called when entering the Head production.
 	EnterHead(c *HeadContext)
 
+	// EnterTerminatingSemicolon is called when entering the TerminatingSemicolon production.
+	EnterTerminatingSemicolon(c *TerminatingSemicolonContext)
+
 	// EnterNotEqual is called when entering the NotEqual production.
 	EnterNotEqual(c *NotEqualContext)
+
+	// EnterConstUnit is called when entering the ConstUnit production.
+	EnterConstUnit(c *ConstUnitContext)
 
 	// EnterPred is called when entering the Pred production.
 	EnterPred(c *PredContext)
@@ -114,6 +129,9 @@ type StellaParserListener interface {
 
 	// EnterNatRec is called when entering the NatRec production.
 	EnterNatRec(c *NatRecContext)
+
+	// EnterSequence is called when entering the Sequence production.
+	EnterSequence(c *SequenceContext)
 
 	// EnterConstFalse is called when entering the ConstFalse production.
 	EnterConstFalse(c *ConstFalseContext)
@@ -139,6 +157,9 @@ type StellaParserListener interface {
 	// EnterFix is called when entering the Fix production.
 	EnterFix(c *FixContext)
 
+	// EnterSubtract is called when entering the Subtract production.
+	EnterSubtract(c *SubtractContext)
+
 	// EnterLet is called when entering the Let production.
 	EnterLet(c *LetContext)
 
@@ -154,6 +175,9 @@ type StellaParserListener interface {
 	// EnterConsList is called when entering the ConsList production.
 	EnterConsList(c *ConsListContext)
 
+	// EnterPatternBinding is called when entering the patternBinding production.
+	EnterPatternBinding(c *PatternBindingContext)
+
 	// EnterBinding is called when entering the binding production.
 	EnterBinding(c *BindingContext)
 
@@ -162,6 +186,12 @@ type StellaParserListener interface {
 
 	// EnterPatternVariant is called when entering the PatternVariant production.
 	EnterPatternVariant(c *PatternVariantContext)
+
+	// EnterPatternInl is called when entering the PatternInl production.
+	EnterPatternInl(c *PatternInlContext)
+
+	// EnterPatternInr is called when entering the PatternInr production.
+	EnterPatternInr(c *PatternInrContext)
 
 	// EnterPatternTuple is called when entering the PatternTuple production.
 	EnterPatternTuple(c *PatternTupleContext)
@@ -180,6 +210,9 @@ type StellaParserListener interface {
 
 	// EnterPatternTrue is called when entering the PatternTrue production.
 	EnterPatternTrue(c *PatternTrueContext)
+
+	// EnterPatternUnit is called when entering the PatternUnit production.
+	EnterPatternUnit(c *PatternUnitContext)
 
 	// EnterPatternInt is called when entering the PatternInt production.
 	EnterPatternInt(c *PatternIntContext)
@@ -289,8 +322,17 @@ type StellaParserListener interface {
 	// ExitVar is called when exiting the Var production.
 	ExitVar(c *VarContext)
 
+	// ExitInl is called when exiting the Inl production.
+	ExitInl(c *InlContext)
+
 	// ExitGreaterThanOrEqual is called when exiting the GreaterThanOrEqual production.
 	ExitGreaterThanOrEqual(c *GreaterThanOrEqualContext)
+
+	// ExitInr is called when exiting the Inr production.
+	ExitInr(c *InrContext)
+
+	// ExitDivide is called when exiting the Divide production.
+	ExitDivide(c *DivideContext)
 
 	// ExitLessThan is called when exiting the LessThan production.
 	ExitLessThan(c *LessThanContext)
@@ -331,8 +373,14 @@ type StellaParserListener interface {
 	// ExitHead is called when exiting the Head production.
 	ExitHead(c *HeadContext)
 
+	// ExitTerminatingSemicolon is called when exiting the TerminatingSemicolon production.
+	ExitTerminatingSemicolon(c *TerminatingSemicolonContext)
+
 	// ExitNotEqual is called when exiting the NotEqual production.
 	ExitNotEqual(c *NotEqualContext)
+
+	// ExitConstUnit is called when exiting the ConstUnit production.
+	ExitConstUnit(c *ConstUnitContext)
 
 	// ExitPred is called when exiting the Pred production.
 	ExitPred(c *PredContext)
@@ -345,6 +393,9 @@ type StellaParserListener interface {
 
 	// ExitNatRec is called when exiting the NatRec production.
 	ExitNatRec(c *NatRecContext)
+
+	// ExitSequence is called when exiting the Sequence production.
+	ExitSequence(c *SequenceContext)
 
 	// ExitConstFalse is called when exiting the ConstFalse production.
 	ExitConstFalse(c *ConstFalseContext)
@@ -370,6 +421,9 @@ type StellaParserListener interface {
 	// ExitFix is called when exiting the Fix production.
 	ExitFix(c *FixContext)
 
+	// ExitSubtract is called when exiting the Subtract production.
+	ExitSubtract(c *SubtractContext)
+
 	// ExitLet is called when exiting the Let production.
 	ExitLet(c *LetContext)
 
@@ -385,6 +439,9 @@ type StellaParserListener interface {
 	// ExitConsList is called when exiting the ConsList production.
 	ExitConsList(c *ConsListContext)
 
+	// ExitPatternBinding is called when exiting the patternBinding production.
+	ExitPatternBinding(c *PatternBindingContext)
+
 	// ExitBinding is called when exiting the binding production.
 	ExitBinding(c *BindingContext)
 
@@ -393,6 +450,12 @@ type StellaParserListener interface {
 
 	// ExitPatternVariant is called when exiting the PatternVariant production.
 	ExitPatternVariant(c *PatternVariantContext)
+
+	// ExitPatternInl is called when exiting the PatternInl production.
+	ExitPatternInl(c *PatternInlContext)
+
+	// ExitPatternInr is called when exiting the PatternInr production.
+	ExitPatternInr(c *PatternInrContext)
 
 	// ExitPatternTuple is called when exiting the PatternTuple production.
 	ExitPatternTuple(c *PatternTupleContext)
@@ -411,6 +474,9 @@ type StellaParserListener interface {
 
 	// ExitPatternTrue is called when exiting the PatternTrue production.
 	ExitPatternTrue(c *PatternTrueContext)
+
+	// ExitPatternUnit is called when exiting the PatternUnit production.
+	ExitPatternUnit(c *PatternUnitContext)
 
 	// ExitPatternInt is called when exiting the PatternInt production.
 	ExitPatternInt(c *PatternIntContext)
